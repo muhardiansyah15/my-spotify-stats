@@ -104,7 +104,7 @@ export default function SpotifyStatsPage({ token }) {
     return (
         <div>
             <section className="features">
-                <h2>Spotify Pie</h2>
+                <h2>Genre Pie Chart</h2>
                 <SpotifyPieChart chartData={pieData} artistToGenres={artistToGenres}  />
             </section>
             <section className="features">
