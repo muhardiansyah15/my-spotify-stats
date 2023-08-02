@@ -1,7 +1,7 @@
 
 # My Spotify Stats
 
-#Description:
+# Description:
 "My Spotify Stats" is a web application that provides users with personalized insights into their Spotify listening habits. With this app, users can explore their Top 10 Genres, Top 10 Songs, Top 10 Artists, and view a Genre Pie Chart, all based on their listening history on Spotify.
 
 # Features:
