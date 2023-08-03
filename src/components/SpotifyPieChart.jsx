@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { PieChart, Pie, Sector } from "recharts";
 
 const renderActiveShape = (props) => {
@@ -76,7 +76,11 @@ const renderActiveShape = (props) => {
 };
 
 export default function SpotifyPieChart({ chartData, artistToGenres }) {
+  const [chartDimensions, setChartDimensions] = useState({ width: 600, height: 600 });
+  const [chartRadius, setChartRadius] = useState({ inner: 130, outer: 160 });
+  const [chartPosition, setChartPosition] = useState({ x: 290, y: 290 });
   const [activeIndex, setActiveIndex] = useState(0);
+
   const onPieEnter = useCallback(
     (_, index) => {
       setActiveIndex(index);
@@ -84,16 +88,48 @@ export default function SpotifyPieChart({ chartData, artistToGenres }) {
     [setActiveIndex]
   );
 
+  useEffect(() => {
+    const handleResize = () => {
+      const maxWidth = 600; // Maximum width for the chart
+      const maxHeight = 600; // Maximum height for the chart
+      const screenWidth = window.innerWidth;
+
+      // Adjust width and height based on the screen size
+      if (screenWidth <= 480) {
+        setChartDimensions({ width: screenWidth - 20, height: (screenWidth - 20) });
+        setChartRadius({inner: 75, outer: 90});
+        setChartPosition({ x: 160, y: 110 });
+      } else {
+        // Keep the chart within the maximum width and height
+        setChartDimensions({ width: maxWidth, height: maxHeight });
+        setChartRadius({ inner: 130, outer: 160 });
+        setChartPosition({ x: 290, y: 290 });
+      }
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Call handleResize once on initial render
+    handleResize();
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <PieChart width={600} height={600}>
+    <div className="chart-container">
+      <PieChart width={chartDimensions.width} height={chartDimensions.height}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
         data={chartData}
-        cx={290}
-        cy={290}
-        innerRadius={130}
-        outerRadius={160}
+        cx={chartPosition.x}
+        cy={chartPosition.y}
+        innerRadius={chartRadius.inner}
+        outerRadius={chartRadius.outer}
         fill="#B0C887"
         dataKey="frequency"
         stroke="#242424"
@@ -101,6 +137,6 @@ export default function SpotifyPieChart({ chartData, artistToGenres }) {
         strokeWidth={1}
       />
     </PieChart>
-    
+    </div>
   );
 }

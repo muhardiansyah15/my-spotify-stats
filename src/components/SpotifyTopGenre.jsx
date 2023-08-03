@@ -1,6 +1,4 @@
-function capitalizeString(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}
+import capitalizeString from "./Capitalized";
 
 export default function SpotifyTopGenre({ data }){
     return (

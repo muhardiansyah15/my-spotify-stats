@@ -84,29 +84,6 @@ section {
 }
 
 
-.quote {
-    background:#549DA0;
-    color:#FFFFFF;
-}
-blockquote {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-blockquote p {
-    margin: 0 0 5px 0;
-    font-size: 24px;
-}
-
-blockquote cite {
-    font-size: 16px;
-    font-style: italic;
-}  
-blockquote cite:before {
-    content: '–';
-    margin-right: 5px;
-}
-
 footer {
     background: #0c0c0c;
     padding: 32px 0;
@@ -146,9 +123,27 @@ table tr td {
     padding: 3px;
 }
 
+.chart-container {
+    max-width: 600px; /* You can adjust this value as per your design */
+    margin: 0 auto; /* Center the chart container on the page */
+  }
+
 
 
 @media screen and (max-width: 480px) {
+    .recharts-wrapper {
+        width: 300px;
+        height: 300px;
+    }
+
+    .feature .container .recharts-wrapper svg {
+        width: 300;
+        height: 300;
+    }
+
+    table tr td {
+        font-size: 15px;
+    }
     .btn {
         display: block;
         font-size: 18px;
@@ -158,14 +153,14 @@ table tr td {
         margin: 0 0 8px 0;
     }
     h2 {
-        font-size: 15px;
+        font-size: 25px;
     }
 
     section {
       text-align: left;
       padding: 40px 0;
       min-height: 327px;
-  }
+    }
   
     
     .feature {
@@ -178,33 +173,6 @@ table tr td {
         justify-content: center;
     }
 
-    /* .feature {
-        width: 50%;
-        display: inline-block;
-        font-size:16px;
-        background: #FFFFFF;
-        color: #000000;
-        vertical-align: middle;
-      } */
-      .feature img {
-        width: 40%;
-      }
-      
-
-    .feature img {
-        width:15%;
-        min-width:60px;
-        margin-right:20px;
-    }
-    .quote {
-        padding: 30px 0;
-    }
-    blockquote p {
-        font-size: 18px;
-    }
-    blockquote cite {
-        font-size: 14px;
-    }
 }  
 
 

@@ -6,14 +6,7 @@ import Footer from './Footer';
 
 const HomePage = () => {
     const [token, setToken] = useState(null);
-    const [topTracks, setTopTracks] = useState([]);
-    const [topTracksActivated, setTopTracksActivated] = useState(false);
-    const [topArtists, setTopArtists] = useState([]);
-    const [topArtistsActivated, setTopArtistsActivated] = useState(false);
-    const getTopTracks = (token) => {
-        setTopTracksActivated(true)
-    }
-
+    
     useEffect(() => {
         var mToken = hash.access_token;
         if (mToken) {
@@ -31,20 +24,20 @@ const HomePage = () => {
                 </div>
             </header>
             <section>
-                <div className="container login-page">
-                    {!token && (
+                {!token && (
+                    <div className="container login-page">
                         <a className="btn-login"
                         href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
                         "%20"
                         )}&response_type=token&show_dialog=true`} >
                         Login to Spotify
                         </a>
-                    
-                    )}
-                    {token && (
+                    </div>
+                
+                )}
+                {token && (
                         <SpotifyStatsPage token={token}/>
-                    )}
-                </div>
+                )}
             </section>
             <Footer/>
         </div>

@@ -2,35 +2,22 @@ import React, { useState, useEffect } from "react";
 import SpotifyPieChart from "./SpotifyPieChart";
 import SpotifyTopGenre from "./SpotifyTopGenre";
 import SpotifyTopArtist from "./SpotifyTopArtist";
+import SpotifyTopSong from "./spotifyTopSong";
+import SpotifyBarChart from "./SpotifyBarChart";
 import axios from "axios";
 
 export default function SpotifyStatsPage({ token }) {
     const [topGenres, setTopGenres] = useState([]);
     const [topArtists, setTopArtists] = useState([]);
     const [artistToGenres, setArtistToGenres] = useState([]);
-    const [pieData, setPieData] = useState({})
+    const [pieData, setPieData] = useState({});
+    const [barData, setBarData] = useState({});
     const [isMounted, setIsMounted] = useState(false);
 
-    const indexOfMax = (arr) => {
-        if (arr.length === 0) {
-            return -1;
-        }
-
-        var max = arr[0];
-        var maxIndex = 0;
-
-        for (var i = 1; i < arr.length; i++) {
-            if (arr[i] > max) {
-                maxIndex = i;
-                max = arr[i];
-            }
-        }
-
-        return maxIndex;
-    }
 
     useEffect(() => {
         var topArtists = [];
+
         const getTopArtists = async (token) => {
             const headers = {
                 "Authorization": "Bearer " + token
@@ -38,7 +25,7 @@ export default function SpotifyStatsPage({ token }) {
             await axios.get("https://api.spotify.com/v1/me/top/artists?time_range=long_term", { headers }).then((response) => {
                 topArtists = response.data.items;
 
-            })
+            });
 
             // Sort the topArtists by popularity in descending order
             topArtists.sort((a, b) => b.popularity - a.popularity);
@@ -85,6 +72,17 @@ export default function SpotifyStatsPage({ token }) {
             // Sort the genreList by frequency in ascending order
             genreList.sort((a, b) => b.frequency - a.frequency);
 
+            // Data for Barchart
+            const getBarData = genreList.map((element, index)=>{
+                return {
+                    id: index,
+                    title: element.genreName,
+                    value: element.frequency,
+                    color: "#3fc42d"
+                }
+            });
+
+            setBarData(getBarData.slice(0, 10));
             setPieData(genreList);
             setTopGenres(genreList.slice(0, 10));
             setIsMounted(true);
@@ -102,19 +100,32 @@ export default function SpotifyStatsPage({ token }) {
         )
 
     return (
-        <div>
+        <>
             <section className="features">
-                <h2>Genre Pie Chart</h2>
-                <SpotifyPieChart chartData={pieData} artistToGenres={artistToGenres}  />
+                <div className="container">
+                        <h2>Genre Chart</h2>
+                        {/* <SpotifyPieChart chartData={pieData} artistToGenres={artistToGenres}  /> */}
+                        <SpotifyBarChart data={barData}/>
+                </div>
+            </section>
+            {/* <section class="features">
+                <div class="container">
+                        <h2>Your Top 10 Genres</h2>
+                        <SpotifyTopGenre data={topGenres}/>
+                </div>
+            </section> */}
+            <section className="features">
+                <div className="container">
+                        <h2>Your Top 10 Songs</h2>
+                        <SpotifyTopSong token={token}/>
+                </div>
             </section>
             <section className="features">
-                <h2>Your Top 10 Genres</h2>
-                <SpotifyTopGenre data={topGenres}/>
+                <div className="container">
+                    <h2>Your Top 10 Artists</h2>
+                    <SpotifyTopArtist data={topArtists}/>
+                </div>
             </section>
-            <section className="features">
-                <h2>Your Top 10 Artists</h2>
-                <SpotifyTopArtist data={topArtists}/>
-            </section>
-        </div>
+        </>
     );
 };
