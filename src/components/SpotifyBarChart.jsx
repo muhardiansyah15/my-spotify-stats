@@ -27,7 +27,7 @@ function SpotifyBarChart({ data }) {
     const handleResize = () => {
       const screenWidth = window.innerWidth/ window.devicePixelRatio;
       if (screenWidth <= 480) {
-        setBarWidth(200);
+        setBarWidth(400);
         setBarHeight(30);
       } else {
         setBarWidth(760);
