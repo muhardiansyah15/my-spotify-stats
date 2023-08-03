@@ -35,7 +35,7 @@ export default function SpotifyStatsPage({ token }) {
             const headers = {
                 "Authorization": "Bearer " + token
             };
-            await axios.get("https://api.spotify.com/v1/me/top/artists", { headers }).then((response) => {
+            await axios.get("https://api.spotify.com/v1/me/top/artists?time_range=long_term", { headers }).then((response) => {
                 topArtists = response.data.items;
 
             })
