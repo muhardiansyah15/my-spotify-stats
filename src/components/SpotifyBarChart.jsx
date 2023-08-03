@@ -23,10 +23,9 @@ function SpotifyBarChart({ data }) {
     color: colors[index % colors.length],
     title: item.title.toUpperCase()
   }));
-
   useEffect(() => {
     const handleResize = () => {
-      const screenWidth = window.innerWidth;
+      const screenWidth = window.innerWidth/ window.devicePixelRatio;
       if (screenWidth <= 480) {
         setBarWidth(200);
         setBarHeight(30);
@@ -45,7 +44,6 @@ function SpotifyBarChart({ data }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  console.log("   BAR= ",barWidth,barHeight);
   return (
     <div>
       <ChartRace

@@ -14,7 +14,6 @@ const HomePage = () => {
         }
 
     });
-    console.log("tokeen = ",token);
     return (
         
         <div>
