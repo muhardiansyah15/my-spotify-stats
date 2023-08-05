@@ -23,11 +23,12 @@ function SpotifyBarChart({ data }) {
     color: colors[index % colors.length],
     title: item.title.toUpperCase()
   }));
+
   useEffect(() => {
     const handleResize = () => {
-      const screenWidth = window.innerWidth/ window.devicePixelRatio;
+      const screenWidth = window.innerWidth / window.devicePixelRatio;
       if (screenWidth <= 480) {
-        setBarWidth(400);
+        setBarWidth(300);
         setBarHeight(30);
       } else {
         setBarWidth(760);
@@ -44,8 +45,17 @@ function SpotifyBarChart({ data }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // Function to add effects after the chart is drawn
+  const afterChartDrawn = () => {
+    // Add animation to the bars
+    const bars = document.querySelectorAll(".chart-race-bar");
+    bars.forEach((bar, index) => {
+      bar.style.transition = `width 1s ease-out ${index * 0.1}s`;
+    });
+  };
+
   return (
-    <div>
       <ChartRace
         data={coloredData} // Use the coloredData instead of the original data
         backgroundColor="#242424"
@@ -58,8 +68,9 @@ function SpotifyBarChart({ data }) {
           font: "normal 400 11px Arial",
           color: "rgba(255,255,255, 0.42)"
         }}
+        duration={1000} // Set the animation duration to 1 second
+        afterChartDrawn={afterChartDrawn} // Call the function after the chart is drawn
       />
-    </div>
   );
 }
 

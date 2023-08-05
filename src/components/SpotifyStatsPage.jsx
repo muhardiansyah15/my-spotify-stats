@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SpotifyPieChart from "./SpotifyPieChart";
-import SpotifyTopGenre from "./SpotifyTopGenre";
 import SpotifyTopArtist from "./SpotifyTopArtist";
 import SpotifyTopSong from "./spotifyTopSong";
 import SpotifyBarChart from "./SpotifyBarChart";
@@ -103,17 +102,10 @@ export default function SpotifyStatsPage({ token }) {
         <>
             <section className="features">
                 <div className="container">
-                        <h2>Genre Chart</h2>
-                        {/* <SpotifyPieChart chartData={pieData} artistToGenres={artistToGenres}  /> */}
+                        <h2>Your Top 10 Genres</h2>
                         <SpotifyBarChart data={barData}/>
                 </div>
             </section>
-            {/* <section class="features">
-                <div class="container">
-                        <h2>Your Top 10 Genres</h2>
-                        <SpotifyTopGenre data={topGenres}/>
-                </div>
-            </section> */}
             <section className="features">
                 <div className="container">
                         <h2>Your Top 10 Songs</h2>
