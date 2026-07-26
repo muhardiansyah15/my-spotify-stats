@@ -1,45 +1,67 @@
+# Resonance · Your Spotify Stats
 
-# Your Spotify Stats
+A music-themed dashboard that turns your Spotify listening history into
+personalized insights: top artists, top tracks, genre breakdowns, a
+"mainstream score", and a live Now Playing view with a spinning vinyl.
 
-# Description:
-"Your Spotify Stats" is a web application that provides users with personalized insights into their Spotify listening habits. With this app, users can explore their Top 10 Genres, Top 10 Songs, Top 10 Artists, and view a Genre Chart, all based on their listening history on Spotify.
+Live site: https://muhardiansyah15.github.io/my-spotify-stats/
 
-Visit the website at: https://muhardiansyah15.github.io/my-spotify-stats/
+## Features
 
-# Features:
+- **Top Genres** — a horizontal bar chart of how often each genre appears
+  across your top 50 artists, with hover tooltips.
+- **Top Artists & Top Tracks** — your heavy rotation, with rank medals,
+  album art, popularity bars, and direct links to Spotify.
+- **Time ranges** — switch between Last 4 Weeks, Last 6 Months, and All Time.
+- **Now Playing** — polls the player every 30 seconds and shows the current
+  track on a spinning vinyl with a live progress bar.
+- **Stat tiles** — top artist, top track, genres explored, and a
+  Mainstream Score (average track popularity, 0–100).
 
-Top 10 Genres: Discover the genres that you listen to the most, ranked by frequency of play.
-Top 10 Songs: Explore your favorite songs on Spotify, ranked by the number of times you've played them.
-Top 10 Artists: Find out which artists you've listened to the most, based on their popularity and your play counts.
-Genre Pie Chart: Visualize the distribution of your listening habits in a colorful and interactive pie chart.
-Personalized Insights: Get a deeper understanding of your music preferences and explore trends in your listening behavior.
+## How it works
 
-# How it works:
+1. You sign in with Spotify using the **Authorization Code flow with PKCE** —
+   the flow Spotify recommends for single-page apps (the old Implicit Grant
+   flow is deprecated). No client secret, no backend: tokens are exchanged
+   and refreshed directly from the browser.
+2. The app requests read-only scopes (`user-top-read`,
+   `user-read-currently-playing`, `user-read-playback-state`) and calls the
+   [Spotify Web API](https://developer.spotify.com/documentation/web-api)
+   with the native `fetch` API.
+3. All data stays in your browser — nothing is stored on a server.
 
-Users log in with their Spotify account to grant access to their listening history.
-The app securely retrieves their top listening data using the Spotify Web API.
-The data is analyzed and processed to generate the Top 10 Genres, Top 10 Songs, Top 10 Artists, and Genre Pie Chart.
-Users are presented with an intuitive and user-friendly interface to explore their personalized Spotify stats.
+## Tech stack
 
-# Technologies Used:
+- **React 18 + Vite** — no other runtime dependencies.
+- Hand-rolled CSS (dark, music-themed design system) — no UI framework.
+- Charts are plain HTML/CSS with a colorblind-safe, contrast-validated
+  palette.
+- Deployed to GitHub Pages via GitHub Actions.
 
-ReactJS: Frontend UI development for a smooth and interactive user experience.
-Node.js/Express: Backend server to handle authentication and API requests to Spotify Web API.
-Axios: HTTP client for making API calls to Spotify.
-Spotify Web API: For accessing user listening data and music metadata.
-Chart.js: Library for creating interactive charts like the Genre Pie Chart.
+## Development
 
-# Contribution:
-Contributions, issues, and feature requests are welcome! If you find a bug or have an idea for an improvement, please open an issue or submit a pull request.
+```bash
+npm install
+npm run dev     # serves on http://127.0.0.1:5173/my-spotify-stats/
+npm run build   # production build to dist/
+npm run lint
+```
 
-# Credits:
-This project was inspired by the Spotify Web API and Chart.js. Special thanks to the open-source community for their valuable contributions.
+### Spotify app setup
 
-# React + Vite
+In the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard),
+your app must have these **Redirect URIs** registered (exact match, note the
+trailing slash):
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- `https://muhardiansyah15.github.io/my-spotify-stats/`
+- `http://127.0.0.1:5173/my-spotify-stats/` — for local dev; Spotify no
+  longer accepts `localhost`, use the loopback IP.
 
-Currently, two official plugins are available:
+If the app is in *development mode*, each Spotify account that logs in must
+be added under **User Management** in the dashboard.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Contribution
+
+Contributions, issues, and feature requests are welcome! If you find a bug or
+have an idea for an improvement, please open an issue or submit a pull
+request.

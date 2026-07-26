@@ -1,24 +1,42 @@
-const Footer = () => {
-    // var currentYear = document.write(new Date().getFullYear());
-    return (
-        <footer>
-            <div className="container">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="https://muhardiansyah.netlify.app/" rel="noopener noreferrer">Contact</a></li>
-                </ul>
-                <br />
-                <ul className="social">
-                    <li><a href="https://github.com/muhardiansyah15"><i className="fa fa-github" aria-hidden="true"></i></a></li>
-                    <li><a href="https://www.linkedin.com/in/muhardiansyah15/"><i className="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                    <li><a href="https://www.facebook.com/muhardiansyah97"><i className="fa fa-facebook" aria-hidden="true"></i></a></li>
-                    <li><a href="https://www.instagram.com/muhardiansyah15"><i className="fa fa-instagram" aria-hidden="true"></i></a></li>
-                </ul>
-                <br/>
-                <p>&copy; Created with <i className="fa fa-heart"></i> by Muhardiansyah</p>
-            </div>
-        </footer>
-    )
+const socials = [
+  {
+    label: "GitHub",
+    href: "https://github.com/muhardiansyah15",
+    d: "M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.55v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/muhardiansyah15/",
+    d: "M4.98 3.5A2.49 2.49 0 0 1 2.5 6 2.49 2.49 0 0 1 0 3.5C0 2.12 1.11 1 2.49 1s2.49 1.12 2.49 2.5zM.28 8.25h4.44V23H.28V8.25zM8.1 8.25h4.26v2.02h.06c.59-1.12 2.04-2.3 4.2-2.3 4.5 0 5.33 2.96 5.33 6.81V23h-4.44v-7.28c0-1.74-.03-3.97-2.42-3.97-2.42 0-2.79 1.89-2.79 3.84V23H8.1V8.25z",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/muhardiansyah15",
+    d: "M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.88 5.88 0 0 0-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.8.72 1.48 1.38 2.13a5.88 5.88 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38 5.88 5.88 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm7.85-10.4a1.44 1.44 0 1 1-1.44-1.44 1.44 1.44 0 0 1 1.44 1.44z",
+  },
+];
+
+export default function Footer() {
+  return (
+    <footer className="footer">
+      <ul className="footer-social">
+        {socials.map((s) => (
+          <li key={s.label}>
+            <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                <path d={s.d} />
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p>
+        Built with <span aria-hidden="true">♫</span> by{" "}
+        <a href="https://muhardiansyah.netlify.app/" target="_blank" rel="noopener noreferrer">
+          Muhardiansyah
+        </a>{" "}
+        · Powered by the Spotify Web API
+      </p>
+    </footer>
+  );
 }
-export default Footer;
